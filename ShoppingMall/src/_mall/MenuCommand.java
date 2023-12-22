@@ -1,7 +1,5 @@
 package _mall;
 
 public interface MenuCommand {
-
-	void init();
-
+	public void init();
 }

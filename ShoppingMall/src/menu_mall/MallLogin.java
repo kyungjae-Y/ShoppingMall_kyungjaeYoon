@@ -1,5 +1,10 @@
 package menu_mall;
 
-public class MallLogin {
+import _mall.MenuCommand;
 
+public class MallLogin implements MenuCommand {
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+	}
 }

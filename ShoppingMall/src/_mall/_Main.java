@@ -1,5 +1,7 @@
 package _mall;
 
-public class _Main {
+import controller.MallController;
 
+public class _Main {
+	MallController mallCont = MallController.getInstance();
 }

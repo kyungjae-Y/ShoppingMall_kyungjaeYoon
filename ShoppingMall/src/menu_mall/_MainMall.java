@@ -7,6 +7,10 @@ import util.Util;
 public class _MainMall implements MenuCommand {
 	private MallController mallCont;
 
+	public _MainMall() {
+		init();
+	}
+
 	@Override
 	public void init() {
 		mallCont = MallController.getInstance();
