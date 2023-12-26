@@ -5,11 +5,11 @@ import controller.MallController;
 import util.Util;
 
 public class _AdminMain implements MenuCommand {
-	private MallController mallCont;
+	private MallController cont;
 
 	@Override
 	public void init() {
-		mallCont = MallController.getInstance();
+		cont = MallController.getInstance();
 	}
 
 	public boolean update() {
@@ -19,14 +19,14 @@ public class _AdminMain implements MenuCommand {
 		System.out.println("[0] 로그아웃");
 		int sel = Util.getValue("메뉴 입력", 0, 3);
 		if (sel == 0) {
-			mallCont.setNext("MallMain");
+			cont.setNext("MallMain");
 		}
 		if (sel == 1) {
-			mallCont.setNext("AdminMember");
+			cont.setNext("AdminMember");
 		} else if (sel == 2) {
-			mallCont.setNext("AdminItem");
+			cont.setNext("AdminItem");
 		} else if (sel == 3) {
-			mallCont.setNext("AdminBoard");
+			cont.setNext("AdminBoard");
 		}
 		return false;
 	}

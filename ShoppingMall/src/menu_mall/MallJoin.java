@@ -5,7 +5,7 @@ import controller.MallController;
 import util.Util;
 
 public class MallJoin implements MenuCommand {
-	private MallController mallCont;
+	private MallController cont;
 
 	public MallJoin() {
 		init();
@@ -13,25 +13,23 @@ public class MallJoin implements MenuCommand {
 
 	@Override
 	public void init() {
-		mallCont = MallController.getInstance();
+		cont = MallController.getInstance();
 	}
 
 	@Override
 	public boolean update() {
-		System.out.println("===[ 널이다 ]===");
-		System.out.println("[1] 회원가입");
-		System.out.println("[2] 로그인");
-		System.out.println("[0] 종료");
-		int sel = Util.getValue("메뉴 입력", 0, 2);
-
-		if (sel == 0) {
-			System.out.println("프로그램 종료");
+		System.out.println("===== [ 회원가입 ] =====");
+		String id = Util.getValue("아이디");
+		int idIdx = cont.getmDAO().idValue(id);
+		if (idIdx != -1) {
+			System.out.println("중복 ID 가 존재합니다");
 			return false;
-		} else if (sel == 1) {
-			mallCont.setNext("MallJoin").update();
-		} else if (sel == 2) {
-			mallCont.setNext("MallLogin").update();
 		}
-		return true;
+		String pw = Util.getValue("비밀번호");
+		String name = Util.getValue("이름");
+		cont.getmDAO().CreateMember(id, pw, name);
+		System.out.println("가입 완료");
+		cont.setNext("MallMain");
+		return false;
 	}
 }
