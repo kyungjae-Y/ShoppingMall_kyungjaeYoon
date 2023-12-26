@@ -6,6 +6,7 @@ import java.util.Map;
 import _mall.MenuCommand;
 import menu_mall.MallJoin;
 import menu_mall.MallLogin;
+import menu_mall._MainMall;
 
 public class MallController {
 
@@ -21,8 +22,9 @@ public class MallController {
 
 	private Map<String, MenuCommand> mallList;
 
-	private void init() {
+	public void init() {
 		mallList = new HashMap<>();
+		mallList.put("MallMain", new _MainMall());
 		mallList.put("MallJoin", new MallJoin());
 		mallList.put("MallLogin", new MallLogin());
 	}
