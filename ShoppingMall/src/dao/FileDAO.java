@@ -18,7 +18,7 @@ public class FileDAO {
 	private String txtPath = "src/files";
 	private Charset charSet = StandardCharsets.UTF_8;
 
-	enum FileName {
+	public enum FileName {
 		BOARD("board.txt"), MEMBER("member.txt"), ITEM("item.txt"), CART("cart.txt");
 
 		private String name;
@@ -37,15 +37,15 @@ public class FileDAO {
 
 	private static FileDAO instance = new FileDAO();
 
-	static public FileDAO getInstance() {
+	public static FileDAO getInstance() {
 		return instance;
 	}
 
 	private void saveFile(FileName name, String data) {
 		Path path = Paths.get("src/files/" + name.getName());
 		try (FileOutputStream fos = new FileOutputStream(path.toString());
-				OutputStreamWriter ow = new OutputStreamWriter(fos, charSet);
-				BufferedWriter bw = new BufferedWriter(ow);) {
+				OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
+				BufferedWriter bw = new BufferedWriter(osw)) {
 			bw.write(data);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -56,8 +56,8 @@ public class FileDAO {
 		Path path = Paths.get(txtPath, name.getName());
 		StringBuilder data = new StringBuilder();
 		try (FileInputStream fis = new FileInputStream(path.toString());
-				InputStreamReader ir = new InputStreamReader(fis, charSet);
-				BufferedReader br = new BufferedReader(ir);) {
+				InputStreamReader isr = new InputStreamReader(fis, charSet);
+				BufferedReader br = new BufferedReader(isr)) {
 			String line;
 			while ((line = br.readLine()) != null) {
 				data.append(line);

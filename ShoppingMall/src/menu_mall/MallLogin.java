@@ -2,7 +2,6 @@ package menu_mall;
 
 import _mall.MenuCommand;
 import controller.MallController;
-import dao.MemberDAO;
 import util.Util;
 
 public class MallLogin implements MenuCommand {
@@ -29,7 +28,7 @@ public class MallLogin implements MenuCommand {
 			return false;
 		}
 		System.out.println("로그인 성공");
-		cont.setLoginId(id);
+		cont.setId(id);
 		if (idIdx == 0) {
 			cont.setNext("AdminMain");
 		}
