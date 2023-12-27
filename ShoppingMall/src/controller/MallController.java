@@ -45,7 +45,7 @@ public class MallController {
 
 	public void init() {
 		mDAO = new MemberDAO();
-		FileDAO.getInstance().FileLoad();
+//		FileDAO.getInstance().loadFile();
 		mapCont = new HashMap<>();
 		mapCont.put("MallMain", new _MallMain());
 		mapCont.put("MallJoin", new MallJoin());
