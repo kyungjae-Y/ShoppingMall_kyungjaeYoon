@@ -45,7 +45,7 @@ public class Item {
 		this.price = Integer.parseInt(price);
 	}
 
-	private Item(String itemNum, String categoryName, String itemName, String price) {
+	public Item(String itemNum, String categoryName, String itemName, String price) {
 		this.itemNum = Integer.parseInt(itemNum);
 		this.categoryName = categoryName;
 		this.itemName = itemName;

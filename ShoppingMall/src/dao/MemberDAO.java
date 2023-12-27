@@ -12,6 +12,15 @@ public class MemberDAO {
 		return mList;
 	}
 
+	public void loadData(String data) {
+		String[] temp = data.split("\n");
+		for (int i = 0; i < temp.length; i++) {
+			String[] info = temp[i].split("/");
+			Member m = new Member(info[0], info[1], info[2], info[3]);
+			mList.add(m);
+		}
+	}
+
 	public MemberDAO() {
 		mList = new ArrayList<Member>();
 		String[] info = { "" + (memberNum++), "admin", "admin", "관리자" };

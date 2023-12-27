@@ -9,13 +9,22 @@ public class CartDAO {
 	private ArrayList<Cart> cList;
 	private MallController cont;
 
+	public ArrayList<Cart> getcList() {
+		return cList;
+	}
+
 	public CartDAO() {
 		cont = MallController.getInstance();
 		cList = new ArrayList<Cart>();
 	}
 
-	public ArrayList<Cart> getcList() {
-		return cList;
+	public void loadData(String data) {
+		String[] temp = data.split("\n");
+		for (int i = 0; i < temp.length; i++) {
+			String[] info = temp[i].split("/");
+			Cart c = new Cart(info[0], info[1], info[2], info[3]);
+			cList.add(c);
+		}
 	}
 
 //	회원 삭제 시 카트 날리기

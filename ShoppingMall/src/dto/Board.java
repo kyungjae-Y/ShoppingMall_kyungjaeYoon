@@ -12,7 +12,7 @@ public class Board {
 	public Board() {
 	}
 
-	private Board(String number, String title, String id, String date, String contents, String hits) {
+	public Board(String number, String title, String contents, String id, String date, String hits) {
 		super();
 		this.boardNum = Integer.parseInt(number);
 		this.title = title;

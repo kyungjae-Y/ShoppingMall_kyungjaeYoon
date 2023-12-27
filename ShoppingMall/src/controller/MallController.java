@@ -69,7 +69,7 @@ public class MallController {
 		iDAO = new ItemDAO();
 		mDAO = new MemberDAO();
 		cgDAO = new CategoryDAO();
-//		FileDAO.getInstance().loadFile();
+		FileDAO.getInstance().loadData(mDAO, bDAO, iDAO, cDAO);
 		mapCont = new HashMap<>();
 		mapCont.put("MallMain", new _MallMain());
 		mapCont.put("MallJoin", new MallJoin());

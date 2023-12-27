@@ -53,9 +53,4 @@ public class CategoryDAO {
 			System.out.println("[" + (i + 1) + "]" + cgList.get(i));
 		}
 	}
-
-//	파일 로드시에 카테고리 가져오기
-//	public void FileToData(ArrayList<String> list) {
-//		cgList = list;
-//	}
 }

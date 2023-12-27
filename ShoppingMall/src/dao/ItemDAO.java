@@ -9,12 +9,21 @@ import dto.Item;
 public class ItemDAO {
 	private ArrayList<Item> itemList;
 
+	public ArrayList<Item> getItemList() {
+		return itemList;
+	}
+
 	public ItemDAO() {
 		itemList = new ArrayList<Item>();
 	}
 
-	public ArrayList<Item> getItemList() {
-		return itemList;
+	public void loadData(String data) {
+		String[] temp = data.split("\n");
+		for (int i = 0; i < temp.length; i++) {
+			String[] info = temp[i].split("/");
+			Item item = new Item(info[0], info[1], info[2], info[3]);
+			itemList.add(item);
+		}
 	}
 
 //	아이템 이름 중복 - 카테고리이름도 일치
@@ -107,25 +116,6 @@ public class ItemDAO {
 		}
 		data = data.substring(0, data.length() - 1);
 		return data;
-	}
-
-//	텍스트파일에서 문자열 받아와서 데이터 넣기 - 셋에 카테고리 넣어서 전달
-	public void FileToData(String data) {
-		if (data.equals(""))
-			return;
-		String datas[] = data.split("\n");
-		itemList.clear();
-		int maxItemNum = 0;
-		for (int i = 0; i < datas.length; i += 1) {
-			Item item = new Item();
-			String[] info = datas[i].split("/");
-			item = item.CreateItem(info);
-			itemList.add(item);
-			if (maxItemNum < Integer.parseInt(info[0])) {
-				maxItemNum = Integer.parseInt(info[0]);
-			}
-		}
-		Item.setNum(maxItemNum);
 	}
 
 //	아이템 넘버로 카테고리 이름 찾아서 반환

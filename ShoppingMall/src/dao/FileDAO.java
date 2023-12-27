@@ -52,6 +52,17 @@ public class FileDAO {
 		}
 	}
 
+	public void loadData(MemberDAO mDAO, BoardDAO bDAO, ItemDAO iDAO, CartDAO cDAO) {
+		String mData = loadFile(FileName.MEMBER);
+		String bData = loadFile(FileName.BOARD);
+		String iData = loadFile(FileName.ITEM);
+		String cData = loadFile(FileName.CART);
+		mDAO.loadData(mData);
+		bDAO.loadData(bData);
+		iDAO.loadData(iData);
+		cDAO.loadData(cData);
+	}
+
 	private String loadFile(FileName name) {
 		Path path = Paths.get(txtPath, name.getName());
 		StringBuilder data = new StringBuilder();

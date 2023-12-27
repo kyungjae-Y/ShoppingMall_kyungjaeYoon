@@ -24,7 +24,7 @@ public class Member {
 		this.memberName = memberName;
 	}
 
-	private Member(String number, String id, String pw, String memberName) {
+	public Member(String number, String id, String pw, String memberName) {
 		super();
 		this.memberNum = Integer.parseInt(number);
 		this.id = id;

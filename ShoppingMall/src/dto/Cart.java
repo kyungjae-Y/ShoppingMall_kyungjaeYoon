@@ -41,7 +41,7 @@ public class Cart {
 		this.itemCnt = Integer.parseInt(itemCnt);
 	}
 
-	private Cart(String cartNum, String id, String itemNum, String itemCnt) {
+	public Cart(String cartNum, String id, String itemNum, String itemCnt) {
 		this.cartNum = Integer.parseInt(cartNum);
 		this.id = id;
 		this.itemNum = Integer.parseInt(itemNum);
