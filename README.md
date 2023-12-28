@@ -9,7 +9,7 @@
 
 
 	  - 관리자 로그인, 멤버 로그인메뉴 따로 있음, id 값 controller 가 저장
-0. 종료 - ""
+> 0. 종료 - ""
 
 관리자 메뉴 - AdminMain
 ==============================
@@ -55,7 +55,7 @@
 
 	- 각각 DAO 에서 data String 파일 만들어서 AdminFileSave에 넘겨주고 txt 파일 만들기
 	       Board.txt 	cart.txt 	item.txt	member.txt
-0. 종료 - ""
+> 0. 종료 - ""
 
 사용자 메뉴 - MemberMain
 ==============================
@@ -110,4 +110,4 @@
 > 6. 로그 아웃 - MallMain
 
 	- id값 "" 로 변경 
-0. 종료 - ""
+> 0. 종료 - ""
