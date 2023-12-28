@@ -1,37 +1,31 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import controller.MallController;
 import dto.Cart;
+import dto.Item;
 
 public class CartDAO {
-	private ArrayList<Cart> cList;
-	private MallController cont;
+	private static CartDAO instance = new CartDAO();
+	private static ArrayList<Cart> cList;
+
+	public CartDAO() {
+		cList = new ArrayList<Cart>();
+	}
+
+	public static CartDAO getInstance() {
+		return instance;
+	}
 
 	public ArrayList<Cart> getcList() {
 		return cList;
 	}
 
-	public CartDAO() {
-		cont = MallController.getInstance();
-		cList = new ArrayList<Cart>();
-	}
-
-	public void loadData(String data) {
-		String[] temp = data.split("\n");
-		for (int i = 0; i < temp.length; i++) {
-			String[] info = temp[i].split("/");
-			Cart c = new Cart(info[0], info[1], info[2], info[3]);
-			cList.add(c);
-		}
-	}
-
 //	회원 삭제 시 카트 날리기
-	public void DeleteMember(String id) {
+	public void MemberDelete(String id) {
 		if (cList.size() == 0)
 			return;
-
 		for (int i = 0; i < cList.size(); i += 1) {
 			if (cList.get(i).getId().equals(id)) {
 				cList.remove(i);
@@ -40,7 +34,7 @@ public class CartDAO {
 		}
 	}
 
-//	아이템 삭제시 카트 아이템도 삭제
+//	아이템 삭제 시 카트 아이템도 삭제
 	public void DeleteItem(int itemNum) {
 		if (cList.size() == 0)
 			return;
@@ -52,23 +46,8 @@ public class CartDAO {
 		}
 	}
 
-//	카테고리 삭제시 안에 있는 아이템 넘버들 받아와서 다 삭제
-	public void DeleteCategory(ArrayList<Integer> iNumList) {
-		if (iNumList.size() == 0)
-			return;
-		for (int i = 0; i < cList.size(); i += 1) {
-			for (int k = 0; k < iNumList.size(); k += 1) {
-				if (cList.get(i).getItemNum() == iNumList.get(k)) {
-					cList.remove(i);
-					i--;
-					break;
-				}
-			}
-		}
-	}
-
 //	텍스트 파일 저장용 데이터 만들기
-	public String DataToFile() {
+	public static String DataToFile() {
 		String data = "";
 		if (cList.size() == 0)
 			return data;
@@ -79,16 +58,14 @@ public class CartDAO {
 		return data;
 	}
 
-//	텍스트파일에서 문자열 받아와서 데이터 넣기
-	public void FileToData(String data) {
-		if (data.equals(""))
+//	텍스트 파일에서 문자열 받아와서 데이터 넣기
+	public static void FileToData(List<String> cData) {
+		if (cData.isEmpty())
 			return;
-		String datas[] = data.split("\n");
-		cList.clear();
 		int maxCartNum = 0;
-		for (int i = 0; i < datas.length; i += 1) {
+		for (int i = 0; i < cData.size(); i += 1) {
 			Cart c = new Cart();
-			String[] info = datas[i].split("/");
+			String[] info = cData.get(i).split("/");
 			c = c.CreateCart(info);
 			cList.add(c);
 			if (maxCartNum < Integer.parseInt(info[0])) {
@@ -98,46 +75,39 @@ public class CartDAO {
 		Cart.setNum(maxCartNum);
 	}
 
-//	id하고 itemNum 받아서 일치하는 값 내보내기
+//	id 하고 itemNum 받아서 일치하는 값 내보내기
 	public int cartNumValue(String id, int itemNum) {
 		if (cList.size() == 0)
 			return -1;
-
 		for (int i = 0; i < cList.size(); i += 1) {
 			if (cList.get(i).getId().equals(id) && cList.get(i).getItemNum() == itemNum) {
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
-//	해당 로그인한 유저의 장바구니 목록 출력 - 카테고리 이름, 아이템 이름, 개수
-	public ArrayList<Integer> getMyCartList(String id) {
+//	해당 로그인한 유저의 구매목록 출력 - 아이템 이름, 가격, 개수, 총 금액
+	public boolean getMyCartList(String id) {
+		ItemDAO iDAO = ItemDAO.getInstance();
 		int cnt = 0;
-		ArrayList<Integer> nameList = new ArrayList<Integer>();
-		System.out.println("[%s] 장바구니 목록".formatted(id));
+		int sum = 0;
+		int total = 0;
 		for (int i = 0; i < cList.size(); i += 1) {
 			if (cList.get(i).getId().equals(id)) {
-				String cgName = cont.getiDAO().getCategoryName(cList.get(i).getItemNum());
-				nameList.add(cList.get(i).getCartNum());
-				System.out.println("[" + (++cnt) + "]" + cgName + cList.get(i));
+				Item myItem = iDAO.itemVelue(cList.get(i).getItemNum());
+				int sumMoney = cList.get(i).getItemCnt() * myItem.getPrice();
+				System.out.println("[%d] %7s (%d원) %d개 총 %7d원".formatted(++cnt, myItem.getItemName(), myItem.getPrice(),
+						cList.get(i).getItemCnt(), sumMoney));
+				total += sumMoney;
+				sum += cList.get(i).getItemCnt();
 			}
 		}
-		return nameList;
+		System.out.println("총 %d개 ( %d 원 )".formatted(sum, total));
+		return cnt == 0 ? true : false;
 	}
 
-//	장바구니 1개 아이템 삭제 - 맴버용 : info[0] categoryName, info[1] itemName
-	public void MemberCartOneDelete(int cartNum) {
-		for (int i = 0; i < cList.size(); i += 1) {
-			if (cartNum == cList.get(i).getCartNum()) {
-				cList.remove(i);
-				break;
-			}
-		}
-	}
-
-//	장바구니 비우기 - 맴버용 : info[0] categoryName, info[1] itemName
+//	장바구니 비우기 - 멤버용 : info[0] categoryName, info[1] itemName
 	public void MemberCartAllDelete(ArrayList<Integer> nameList) {
 		for (int i = 0; i < nameList.size(); i += 1) {
 			for (int k = 0; k < cList.size(); k += 1) {
@@ -149,14 +119,24 @@ public class CartDAO {
 		}
 	}
 
-//	내 장바구니에 있는 개수 반환
-	public void MyCartNum(String id) {
-		int cnt = 0;
-		for (int i = 0; i < cList.size(); i += 1) {
-			if (cList.get(i).getId().equals(id)) {
-				cnt++;
+//	카트에 저장되어 있는 아이템 개수 받아오기
+	public void ItemRevenue(int[][] arr) {
+		for (Cart c : cList) {
+			for (int i = 0; i < arr.length; i++) {
+//				itemNum이 일치하면 개수 추가
+				if (c.getItemNum() == arr[i][1]) {
+					arr[i][2] += c.getItemCnt();
+					break;
+				}
 			}
 		}
-		System.out.println("장바구니 개수 : %d개".formatted(cnt));
+//		순위도 여기서 매기고 - 아이템 개수 기준
+		for (int i = 0; i < arr.length; i++) {
+			for (int k = 0; k < arr.length; k += 1) {
+				if (arr[i][2] <= arr[k][2]) {
+					arr[i][3] += 1;
+				}
+			}
+		}
 	}
 }

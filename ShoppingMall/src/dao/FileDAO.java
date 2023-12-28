@@ -1,24 +1,18 @@
 package dao;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class FileDAO {
-	private String txtPath = "src/files";
+	private String txtPath = "src/files/";
 	private Charset charSet = StandardCharsets.UTF_8;
 
-	public enum FileName {
+	enum FileName {
 		BOARD("board.txt"), MEMBER("member.txt"), ITEM("item.txt"), CART("cart.txt");
 
 		private String name;
@@ -32,57 +26,18 @@ public class FileDAO {
 		}
 	}
 
-	private FileDAO() {
+	public FileDAO() {
+		init();
 	}
 
 	private static FileDAO instance = new FileDAO();
 
-	public static FileDAO getInstance() {
+	static public FileDAO getInstance() {
 		return instance;
 	}
 
-	private void saveFile(FileName name, String data) {
-		Path path = Paths.get("src/files/" + name.getName());
-		try (FileOutputStream fos = new FileOutputStream(path.toString());
-				OutputStreamWriter osw = new OutputStreamWriter(fos, charSet);
-				BufferedWriter bw = new BufferedWriter(osw)) {
-			bw.write(data);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public void loadData(MemberDAO mDAO, BoardDAO bDAO, ItemDAO iDAO, CartDAO cDAO) {
-		String mData = loadFile(FileName.MEMBER);
-		String bData = loadFile(FileName.BOARD);
-		String iData = loadFile(FileName.ITEM);
-		String cData = loadFile(FileName.CART);
-		mDAO.loadData(mData);
-		bDAO.loadData(bData);
-		iDAO.loadData(iData);
-		cDAO.loadData(cData);
-	}
-
-	private String loadFile(FileName name) {
-		Path path = Paths.get(txtPath, name.getName());
-		StringBuilder data = new StringBuilder();
-		try (FileInputStream fis = new FileInputStream(path.toString());
-				InputStreamReader isr = new InputStreamReader(fis, charSet);
-				BufferedReader br = new BufferedReader(isr)) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				data.append(line);
-				data.append("\n");
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return data.toString().substring(0, data.toString().length() - 1);
-	}
-
-	private void createFile(FileName name) {
+//	텍스트 파일이 없으면 만들기
+	private static void createFile(FileName name) {
 		Path path = Paths.get("src/files/" + name.getName());
 		try {
 			Files.createFile(path);
@@ -91,10 +46,32 @@ public class FileDAO {
 		}
 	}
 
+//	메인 실행할때 컨트롤러 안에서 불러오면 파일 로드함
 	private void init() {
 		createFile(FileName.BOARD);
 		createFile(FileName.MEMBER);
 		createFile(FileName.ITEM);
 		createFile(FileName.CART);
+		try {
+			List<String> bData = FileLoad(FileName.BOARD);
+			BoardDAO.FileToData(bData);
+			List<String> mData = FileLoad(FileName.MEMBER);
+			MemberDAO.FileToData(mData);
+			List<String> iData = FileLoad(FileName.ITEM);
+			ItemDAO.FileToData(iData);
+			List<String> cData = FileLoad(FileName.CART);
+			CartDAO.FileToData(cData);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+//	이걸로 파일 전체 불러올 수 있음
+	private List<String> FileLoad(FileName name) throws IOException {
+		return Files.readAllLines(Paths.get(txtPath + name.getName()));
+	}
+
+	public void FileSave(String txtName, String data) throws IOException {
+		Files.writeString(Paths.get(txtPath + txtName), data, charSet);
 	}
 }

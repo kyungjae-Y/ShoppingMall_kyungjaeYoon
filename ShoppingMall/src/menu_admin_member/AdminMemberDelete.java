@@ -1,15 +1,10 @@
 package menu_admin_member;
 
 import _mall.MenuCommand;
-//import controller.MallController;
+import controller.MallController;
 
 public class AdminMemberDelete implements MenuCommand {
-//	private MallController cont;
-
-	@Override
-	public void init() {
-//		cont = MallController.getInstance();
-	}
+	private MallController cont = MallController.getInstance();
 
 	@Override
 	public boolean update() {

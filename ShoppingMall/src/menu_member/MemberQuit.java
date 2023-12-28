@@ -1,12 +1,10 @@
 package menu_member;
 
 import _mall.MenuCommand;
+import controller.MallController;
 
 public class MemberQuit implements MenuCommand {
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-	}
+	private MallController cont = MallController.getInstance();
 
 	@Override
 	public boolean update() {

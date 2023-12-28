@@ -18,12 +18,12 @@ public class Item {
 		return itemNum;
 	}
 
-	public String getCategoriName() {
+	public String getCategoryName() {
 		return categoryName;
 	}
 
-	public void setCategoriName(String categoriName) {
-		this.categoryName = categoriName;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getItemName() {
@@ -38,9 +38,9 @@ public class Item {
 		return price;
 	}
 
-	public Item(String categoriName, String itemName, String price) {
+	public Item(String categoryName, String itemName, String price) {
 		this.itemNum = ++num;
-		this.categoryName = categoriName;
+		this.categoryName = categoryName;
 		this.itemName = itemName;
 		this.price = Integer.parseInt(price);
 	}
@@ -65,10 +65,11 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return categoryName + " " + itemName + " ";
+		return "[%d]\t[%s]\t[%s]\t[%d원]".formatted(itemNum, categoryName, itemName, price);
 	}
 
 	public String DataToFile() {
 		return "%d/%s/%s/%d".formatted(itemNum, categoryName, itemName, price);
 	}
+
 }

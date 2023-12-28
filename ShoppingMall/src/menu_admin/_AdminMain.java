@@ -6,12 +6,7 @@ import controller.MallController;
 import util.Util;
 
 public class _AdminMain implements MenuCommand {
-	private MallController cont;
-
-	@Override
-	public void init() {
-		cont = MallController.getInstance();
-	}
+	private MallController cont = MallController.getInstance();
 
 	public boolean update() {
 		System.out.println("===== [ 관리자 ] =====");
