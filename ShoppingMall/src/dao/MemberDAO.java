@@ -23,7 +23,7 @@ public class MemberDAO {
 			AdminJoin();
 	}
 
-//	관리자 자동생성
+//	관리자 자동 생성
 	public void AdminJoin() {
 		String[] info = { 1000 + "", "admin", "admin", "관리자" };
 		mList.add(Member.CreateMember(info));
@@ -73,7 +73,7 @@ public class MemberDAO {
 		return data;
 	}
 
-//	텍스트파일에서 문자열 받아와서 데이터 넣기
+//	텍스트 파일에서 문자열 받아와서 데이터 넣기
 	public static void FileToData(List<String> mData) {
 		if (mData.isEmpty())
 			return;

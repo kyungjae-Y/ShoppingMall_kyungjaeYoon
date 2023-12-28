@@ -51,7 +51,6 @@ public class Cart {
 	public Cart CreateCart(String[] info) {
 		if (info == null || info.length == 0)
 			return null;
-
 		return new Cart(info[0], info[1], info[2], info[3]);
 	}
 

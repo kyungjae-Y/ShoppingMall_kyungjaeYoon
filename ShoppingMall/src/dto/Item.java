@@ -55,7 +55,6 @@ public class Item {
 	public Item CreateItem(String[] info) {
 		if (info == null || info.length == 0)
 			return null;
-
 		return new Item(info[0], info[1], info[2], info[3]);
 	}
 
@@ -65,7 +64,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "[%d]\t[%s]\t[%s]\t[%d원]".formatted(itemNum, categoryName, itemName, price);
+		return "[%d]\t[%s] [%s]\t[%d원]".formatted(itemNum, categoryName, itemName, price);
 	}
 
 	public String DataToFile() {

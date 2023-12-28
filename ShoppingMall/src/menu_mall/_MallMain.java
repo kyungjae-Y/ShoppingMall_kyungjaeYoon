@@ -10,7 +10,7 @@ public class _MallMain implements MenuCommand {
 	@Override
 	public boolean update() {
 		cont.setNext("MallMain");
-		System.out.println("===[ 쇼핑몰 ]===");
+		System.out.println("===== [ 쇼핑몰 ] =====");
 		System.out.println("[1] 회원가입");
 		System.out.println("[2] 로그인");
 		System.out.println("[0] 종료");

@@ -11,7 +11,6 @@ public class MemberBoard implements MenuCommand {
 	@Override
 	public boolean update() {
 		BoardDAO bDAO = BoardDAO.getInstance();
-
 		cont.setNext("MemberBoard");
 		bDAO.PageCalculate();
 		bDAO.PrintBoard();
@@ -34,5 +33,4 @@ public class MemberBoard implements MenuCommand {
 		}
 		return false;
 	}
-
 }

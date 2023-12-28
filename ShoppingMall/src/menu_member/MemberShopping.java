@@ -29,7 +29,7 @@ public class MemberShopping implements MenuCommand {
 		int categoryidx = Util.getValue("선택", 1, cgSize) - 1;
 		if (categoryidx == -2)
 			return false;
-//		카테고리 이름 받아옴 ItemDAO에서 카테고리 이름하고 일치하는 아이템 리스트도
+//		카테고리 이름 받아온다, ItemDAO 에서 카테고리 이름하고 일치하는 아이템 리스트도
 		String categoryName = iDAO.getCategoryName(categoryidx);
 		ArrayList<Item> cgToItemList = iDAO.CategoriToItemList(categoryName);
 //		아이템 선택
@@ -48,11 +48,9 @@ public class MemberShopping implements MenuCommand {
 			System.out.println("[ %s %d개 구매 완료 ]".formatted(cgToItemList.get(itemIdx).getItemName(), cnt));
 			return false;
 		}
-		Cart cart = new Cart(cont.getId(), cgToItemList.get(itemIdx).getItemNum() + "", cnt + ""); // 없다면 add
+		Cart cart = new Cart(cont.getId(), cgToItemList.get(itemIdx).getItemNum() + "", cnt + "");
 		cDAO.getcList().add(cart);
-
 		System.out.println("[ %s %d개 구매 완료 ]".formatted(cgToItemList.get(itemIdx).getItemName(), cnt));
 		return false;
 	}
-
 }

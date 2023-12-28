@@ -17,7 +17,7 @@ public class MemberCart implements MenuCommand {
 			cont.setNext("MemberMain");
 			return false;
 		}
-		System.out.println("===[ 구매내역 ]===");
+		System.out.println("===== [ 구매내역 ] =====");
 //		아무것도 없으면 true 반납
 		if (cDAO.getMyCartList(cont.getId())) {
 			System.out.println("[%s] 장바구니에 상품이 없습니다".formatted(cont.getId()));

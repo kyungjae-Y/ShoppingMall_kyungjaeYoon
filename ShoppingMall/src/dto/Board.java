@@ -67,7 +67,6 @@ public class Board {
 	public Board CreateBoard(String[] info) {
 		if (info == null || info.length == 0)
 			return null;
-
 		return new Board(info[0], info[1], info[2], info[3], info[4], info[5]);
 	}
 

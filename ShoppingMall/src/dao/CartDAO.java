@@ -97,13 +97,13 @@ public class CartDAO {
 			if (cList.get(i).getId().equals(id)) {
 				Item myItem = iDAO.itemVelue(cList.get(i).getItemNum());
 				int sumMoney = cList.get(i).getItemCnt() * myItem.getPrice();
-				System.out.println("[%d] %7s (%d원) %d개 총 %7d원".formatted(++cnt, myItem.getItemName(), myItem.getPrice(),
+				System.out.println("[%d] %s (%d원) %2d개 총 %7d원".formatted(++cnt, myItem.getItemName(), myItem.getPrice(),
 						cList.get(i).getItemCnt(), sumMoney));
 				total += sumMoney;
 				sum += cList.get(i).getItemCnt();
 			}
 		}
-		System.out.println("총 %d개 ( %d 원 )".formatted(sum, total));
+		System.out.println("총 %d개 (%d원)".formatted(sum, total));
 		return cnt == 0 ? true : false;
 	}
 

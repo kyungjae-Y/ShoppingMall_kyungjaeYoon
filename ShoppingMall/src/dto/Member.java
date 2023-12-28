@@ -60,7 +60,6 @@ public class Member {
 	public static Member CreateMember(String[] info) {
 		if (info == null || info.length == 0)
 			return null;
-
 		return new Member(info[0], info[1], info[2], info[3]);
 	}
 

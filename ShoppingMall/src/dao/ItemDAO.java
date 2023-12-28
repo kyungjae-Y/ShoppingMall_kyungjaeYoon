@@ -86,7 +86,7 @@ public class ItemDAO {
 
 //	카테고리 내림차순(같다면 아이템 기준 내림차순) 정렬해서 출력
 	public void itemListPrint() {
-		System.out.println("===[ 카테고리별 아이템 목록]===");
+		System.out.println("===== [ 카테고리별 아이템 목록] =====");
 		itemList.stream().sorted(Comparator.comparing(Item::getCategoryName).thenComparing(Item::getItemName))
 				.forEach(System.out::println);
 	}

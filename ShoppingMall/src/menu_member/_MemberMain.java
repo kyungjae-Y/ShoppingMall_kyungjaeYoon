@@ -10,7 +10,7 @@ public class _MemberMain implements MenuCommand {
 	@Override
 	public boolean update() {
 		cont.setNext("MemberMain");
-		System.out.println("===[ %s ]===".formatted(cont.getId()));
+		System.out.println("===== [ %s ] =====".formatted(cont.getId()));
 		System.out.println("[1] 상품구매");
 		System.out.println("[2] 구매내역");
 		System.out.println("[3] 게시판");
@@ -19,7 +19,6 @@ public class _MemberMain implements MenuCommand {
 		System.out.println("[6] 로그아웃");
 		System.out.println("[0] 종료");
 		int sel = Util.getValue("메뉴 입력", 0, 6);
-
 		if (sel == 1) {
 			cont.setNext("MemberShopping");
 		} else if (sel == 2) {
@@ -39,5 +38,4 @@ public class _MemberMain implements MenuCommand {
 		}
 		return false;
 	}
-
 }
