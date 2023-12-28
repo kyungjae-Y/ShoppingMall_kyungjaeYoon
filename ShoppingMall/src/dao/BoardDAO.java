@@ -72,7 +72,7 @@ public class BoardDAO {
 	}
 
 //	게시글 하나 삭제
-	public boolean DedetePage(int idx, String id) {
+	public boolean DeletePage(int idx, String id) {
 		if (!id.equals("관리자") && !bList.get(idx).getId().equals(id)) {
 			return true;
 		}

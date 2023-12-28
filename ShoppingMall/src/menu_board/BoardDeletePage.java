@@ -51,7 +51,7 @@ public class BoardDeletePage implements MenuCommand {
 					continue;
 				}
 				bIdx -= 1;
-				if (bDAO.DedetePage(bIdx, id)) {
+				if (bDAO.DeletePage(bIdx, id)) {
 					System.out.println("[%s] 본인 게시글만 삭제하실 수 있습니다".formatted(id));
 					break;
 				}

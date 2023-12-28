@@ -71,7 +71,7 @@ public class Board {
 	}
 
 	public void PrintBoard() {
-		System.out.println("[ 제목 : %s\t작성자 : %s\t날짜 : %s\t조회수 : %d".formatted(title, id, date, hits));
+		System.out.println("[ 제목 : %s 작성자 : %s 날짜 : %s 조회수 : %d".formatted(title, id, date, hits));
 	}
 
 	public String DataToFile() {
@@ -80,7 +80,7 @@ public class Board {
 
 //	게시글 보여주기
 	public void ViewPage() {
-		System.out.printf("[ 제목 : %10s 작성자 : %10s 날짜 : %11s 조회수 : %d]\n", title, id, date, hits);
+		System.out.printf("[ 제목 : %s 작성자 : %s 날짜 : %s 조회수 : %d]\n", title, id, date, hits);
 		System.out.println("---------------------------------------------");
 		System.out.println(contents);
 	}
